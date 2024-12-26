@@ -10,8 +10,14 @@ public class RegexPatch {
     private String regex;
     private String replacement;
 
-    public void apply(Path target) throws IOException {
-            String newText = Files.readString(target).replaceAll(regex, replacement);
-            Files.writeString(target, newText);
+    public void apply(Path target) throws IOException, RuntimeException {
+        String oldText = Files.readString(target);
+        String newText = oldText.replaceAll(regex, replacement);
+
+        if (oldText.equals(newText)) {
+            throw new RuntimeException("Failed to find target for regex");
+        }
+
+        Files.writeString(target, newText);
     }
 }

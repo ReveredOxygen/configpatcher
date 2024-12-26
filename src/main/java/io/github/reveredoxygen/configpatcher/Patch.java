@@ -35,10 +35,27 @@ public class Patch {
         }
     }
 
+    public String getType() {
+        if (regex != null) {
+            return "regex";
+        } else if (appendLines != null) {
+            return "appendLines";
+        } else if (replaceString != null) {
+            return "replaceString";
+        } else if (copyFile != null) {
+            return "copyFile";
+        } else if (deleteFile != null) {
+            return "deleteFile";
+        }
+
+        return "INVALID";
+    }
+
     @Override
     public String toString() {
         return "Patch{" +
-                "description='" + description + '\'' +
+                "type=" + getType() +
+                ", description='" + description + '\'' +
                 ", target=" + target +
                 '}';
     }

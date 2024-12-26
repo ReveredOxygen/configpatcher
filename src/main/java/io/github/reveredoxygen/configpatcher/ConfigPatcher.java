@@ -107,12 +107,12 @@ public class ConfigPatcher implements LanguageAdapter {
         for (Map.Entry<String, Patch[]> version : patches) {
             for (Patch patch : version.getValue()) {
                 patchCount++;
-                LOGGER.info("Applying {} for version {}", patch, version.getKey());
                 try {
                     patch.apply();
+                    LOGGER.info("Applied {} for version {}", patch, version.getKey());
                     successCount++;
                 } catch (Exception e) {
-                    LOGGER.error("Failed applying patch {}: {}", patch, e);
+                    LOGGER.error("Failed applying {}: {}", patch, e);
                 }
             }
         }
