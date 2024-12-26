@@ -1,6 +1,7 @@
 package io.github.reveredoxygen.configpatcher;
 
 import io.github.reveredoxygen.configpatcher.patches.AppendLinesPatch;
+import io.github.reveredoxygen.configpatcher.patches.CopyFilePatch;
 import io.github.reveredoxygen.configpatcher.patches.RegexPatch;
 import io.github.reveredoxygen.configpatcher.patches.ReplaceStringPatch;
 
@@ -17,6 +18,7 @@ public class Patch {
     private RegexPatch regex;
     private AppendLinesPatch appendLines;
     private ReplaceStringPatch replaceString;
+    private CopyFilePatch copyFile;
 
     public void apply() throws Exception {
         Path targetPath = FileSystems.getDefault().getPath(target);
@@ -28,6 +30,8 @@ public class Patch {
             appendLines.apply(targetPath);
         } else if (replaceString != null) {
             replaceString.apply(targetPath);
+        } else if (copyFile != null) {
+            copyFile.apply(targetPath);
         }
     }
 
