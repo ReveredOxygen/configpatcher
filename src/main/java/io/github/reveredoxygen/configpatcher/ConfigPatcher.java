@@ -25,7 +25,7 @@ public class ConfigPatcher implements LanguageAdapter {
 
     public ConfigPatcher() {
         try {
-            Files.list(CONFIG_PATH).filter(Files::isDirectory).forEach(ConfigPatcher::processPatchSet);
+            Files.list(CONFIG_PATH).filter(Files::isDirectory).forEachOrdered(ConfigPatcher::processPatchSet);
         } catch (IOException e) {
             LOGGER.error(e.toString());
         }
