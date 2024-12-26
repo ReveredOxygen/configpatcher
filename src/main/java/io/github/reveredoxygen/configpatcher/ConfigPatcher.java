@@ -24,8 +24,6 @@ public class ConfigPatcher implements LanguageAdapter {
     public static final Path GAME_PATH = FabricLoader.getInstance().getGameDir();
 
     public ConfigPatcher() {
-        LOGGER.info("Hello Fabric world!");
-
         try {
             Files.list(CONFIG_PATH).filter(Files::isDirectory).forEach(ConfigPatcher::processPatchSet);
         } catch (IOException e) {
