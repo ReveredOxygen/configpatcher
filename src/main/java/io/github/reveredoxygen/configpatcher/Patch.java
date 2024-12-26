@@ -2,10 +2,8 @@ package io.github.reveredoxygen.configpatcher;
 
 import io.github.reveredoxygen.configpatcher.patches.AppendLinesPatch;
 import io.github.reveredoxygen.configpatcher.patches.RegexPatch;
+import io.github.reveredoxygen.configpatcher.patches.ReplaceStringPatch;
 
-import java.io.IOException;
-import java.io.ObjectInputFilter;
-import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
@@ -18,6 +16,7 @@ public class Patch {
     // Only one of these will be initialized, depending on the json input
     private RegexPatch regex;
     private AppendLinesPatch appendLines;
+    private ReplaceStringPatch replaceString;
 
     public void apply() throws Exception {
         Path targetPath = FileSystems.getDefault().getPath(target);
@@ -27,6 +26,8 @@ public class Patch {
             regex.apply(targetPath);
         } else if (appendLines != null) {
             appendLines.apply(targetPath);
+        } else if (replaceString != null) {
+            replaceString.apply(targetPath);
         }
     }
 

@@ -1,7 +1,6 @@
 package io.github.reveredoxygen.configpatcher;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.LanguageAdapter;
@@ -12,10 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 // We can pretend to be a language adapter to load before any other mod
 // This is important because if we modify their configs, we want to do it before they can load them
