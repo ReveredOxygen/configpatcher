@@ -114,7 +114,7 @@ public class ConfigPatcher implements LanguageAdapter {
                     patch.apply();
                     successCount++;
                 } catch (Exception e) {
-                    LOGGER.error("Failed applying patch {}:\n{}", patch, e);
+                    LOGGER.error("Failed applying patch {}: {}", patch, e);
                 }
             }
         }
