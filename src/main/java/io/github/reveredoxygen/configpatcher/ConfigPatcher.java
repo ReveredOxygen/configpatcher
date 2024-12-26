@@ -74,13 +74,18 @@ public class ConfigPatcher implements LanguageAdapter {
         }
 
         if (previousVersion.isBlank()) {
-            LOGGER.info("First run for {}, assuming up to date", name);
             try {
-                Files.writeString(path.resolve("previous-version.txt"), currentVersion);
+                if (Files.isRegularFile(path.resolve("assume-previous-version.txt"))) {
+                    previousVersion = Files.readString(path.resolve("assume-previous-version.txt"));
+                    LOGGER.info("First run for {}, assuming version {}", name, previousVersion);
+                } else {
+                    Files.writeString(path.resolve("previous-version.txt"), currentVersion);
+                    LOGGER.info("First run for {}, assuming up to date", name);
+                }
             } catch (IOException e) {
                 LOGGER.error(e.toString());
+                return;
             }
-            return;
         }
 
         // If we're up to date, we don't have to do anything
